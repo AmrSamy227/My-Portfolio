@@ -56,9 +56,8 @@ export function Hero() {
         </h1>
 
         <p className="hero__lede">
-          Crafting high-octane digital experiences where meticulous engineering meets visual finesse.
-          Bridging deep frontend specialization with robust full-stack architecture.
-        </p>
+          
+          </p>
 
         <InteractiveConsole />
 

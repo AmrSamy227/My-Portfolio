@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 
 const words = [
   'FULL-STACK DEVELOPER',
@@ -7,12 +7,12 @@ const words = [
   'CREATIVE PROBLEM SOLVER',
 ];
 
-export const TextScramble = memo(function TextScramble() {
+export function TextScramble() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState(words[0]);
 
   useEffect(() => {
-    const chars = '!<>-_/[]{}~=+*^?#_01';
+    const chars = '!<>-_\\/[]{}—=+*^?#________';
     let frame = 0;
     let animId: number;
     const targetWord = words[currentWordIndex];
@@ -46,7 +46,7 @@ export const TextScramble = memo(function TextScramble() {
 
     animId = requestAnimationFrame(scramble);
 
-    // Switch words every 4.2s
+    // Switch words every 3.8s
     const timeout = setTimeout(() => {
       setCurrentWordIndex((prev) => (prev + 1) % words.length);
     }, 4200);
@@ -57,12 +57,6 @@ export const TextScramble = memo(function TextScramble() {
     };
   }, [currentWordIndex]);
 
-  return (
-    <span className="hero__title-white" aria-label={words[currentWordIndex]}>
-      <span className="hero__title-scramble" aria-hidden="true">
-        {displayText}
-      </span>
-    </span>
-  );
-});
+  return <span className="hero__title-white hero__title-scramble">{displayText}</span>;
+}
 

@@ -436,26 +436,14 @@ img, svg { display: block; }
 
 .hero__title-white {
   color: var(--text-primary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 2.15em;
-  height: 2.15em;
-  line-height: 1.05;
-  contain: layout;
-  position: relative;
-  overflow: visible;
+  display: block;
+  min-height: 1.1em;
 }
 .hero__title-scramble {
   font-family: var(--font);
   background: linear-gradient(180deg, #FFFFFF 0%, #B8C1BF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: block;
-  width: 100%;
-  text-align: center;
-  text-wrap: balance;
 }
 
 .hero__lede {
@@ -1535,7 +1523,6 @@ img, svg { display: block; }
   /* Hero */
   .hero { min-height: 100svh; padding-top: 90px; padding-bottom: 90px; }
   .hero__title { font-size: clamp(2.6rem, 11vw, 4.4rem); }
-  .hero__title-white { height: 3.15em; min-height: 3.15em; }
   .hero__lede { font-size: 14px; margin-top: 20px; }
   .interactive-console { width: 100%; margin-top: 20px; }
   .hero__actions { gap: 14px; margin-top: 26px; }
