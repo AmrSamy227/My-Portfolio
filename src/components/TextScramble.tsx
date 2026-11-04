@@ -1,62 +1,39 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const words = [
-  'FULL-STACK DEVELOPER',
-  'REACT & NEXT.JS SPECIALIST',
-  'UI/UX CRAFTSMAN',
-  'CREATIVE PROBLEM SOLVER',
+const titles = [
+  'FULL STACK DEVELOPER',
+  'UI / UX CRAFTSMAN',
+  'CREATIVE WEB ENGINEER',
+  'REACT & NODE ARCHITECT',
 ];
 
 export function TextScramble() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(words[0]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const chars = '!<>-_\\/[]{}—=+*^?#________';
-    let frame = 0;
-    let animId: number;
-    const targetWord = words[currentWordIndex];
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % titles.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
-    const scramble = () => {
-      frame++;
-      let output = '';
-      let complete = true;
-
-      for (let i = 0; i < targetWord.length; i++) {
-        if (targetWord[i] === ' ') {
-          output += ' ';
-          continue;
-        }
-
-        // Progressively reveal correct character from left to right
-        if (frame > i * 2.5 + 8) {
-          output += targetWord[i];
-        } else {
-          output += chars[Math.floor(Math.random() * chars.length)];
-          complete = false;
-        }
-      }
-
-      setDisplayText(output);
-
-      if (!complete) {
-        animId = requestAnimationFrame(scramble);
-      }
-    };
-
-    animId = requestAnimationFrame(scramble);
-
-    // Switch words every 3.8s
-    const timeout = setTimeout(() => {
-      setCurrentWordIndex((prev) => (prev + 1) % words.length);
-    }, 4200);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      clearTimeout(timeout);
-    };
-  }, [currentWordIndex]);
-
-  return <span className="hero__title-white hero__title-scramble">{displayText}</span>;
+  return (
+    <span className="hero__title-rotator" aria-live="polite">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={titles[index]}
+          initial={{ opacity: 0, y: 26, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -26, filter: 'blur(6px)' }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="hero__title-white hero__title-scramble"
+        >
+          {titles[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
 }
+
 
